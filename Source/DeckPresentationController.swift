@@ -62,6 +62,7 @@ final class DeckPresentationController: UIPresentationController, UIGestureRecog
 	
 	convenience init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?, backgroundColor: UIColor? = nil, presentAnimation: (() -> ())? = nil, presentCompletion: ((Bool) ->())? = nil, dismissAnimation: (() -> ())? = nil, dismissCompletion: ((Bool) -> ())? = nil) {
 		self.init(presentedViewController: presentedViewController, presenting: presentingViewController)
+        self.backgroundColor = backgroundColor
 		self.presentAnimation = presentAnimation
 		self.presentCompletion = presentCompletion
 		self.dismissAnimation = dismissAnimation
