@@ -50,7 +50,9 @@ final class DeckPresentationController: UIPresentationController, UIGestureRecog
 	private var cachedContainerWidth: CGFloat = 0
     private var snapshotViewHeightConstraint: NSLayoutConstraint?
 	private var snapshotViewAspectRatioConstraint: NSLayoutConstraint?
-	
+
+    private var backgroundColor: UIColor? = nil
+
 	private var presentAnimation: (() -> ())? = nil
 	private var presentCompletion: ((Bool) -> ())? = nil
 	private var dismissAnimation: (() -> ())? = nil
@@ -58,7 +60,7 @@ final class DeckPresentationController: UIPresentationController, UIGestureRecog
 	
 	// MARK:- Initializers
 	
-	convenience init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?, presentAnimation: (() -> ())? = nil, presentCompletion: ((Bool) ->())? = nil, dismissAnimation: (() -> ())? = nil, dismissCompletion: ((Bool) -> ())? = nil) {
+	convenience init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?, backgroundColor: UIColor? = nil, presentAnimation: (() -> ())? = nil, presentCompletion: ((Bool) ->())? = nil, dismissAnimation: (() -> ())? = nil, dismissCompletion: ((Bool) -> ())? = nil) {
 		self.init(presentedViewController: presentedViewController, presenting: presentingViewController)
 		self.presentAnimation = presentAnimation
 		self.presentCompletion = presentCompletion
@@ -137,7 +139,7 @@ final class DeckPresentationController: UIPresentationController, UIGestureRecog
             .scaledBy(x: scale, y: scale)
             .translatedBy(x: 0, y: initialFrameForRoundedViewForPresentingView.height / 2)
         
-        backgroundView.backgroundColor = .black
+        backgroundView.backgroundColor = backgroundColor ?? .black
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         containerView.insertSubview(backgroundView, belowSubview: presentingViewSnapshotView)
         

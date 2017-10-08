@@ -20,7 +20,8 @@ public final class DeckTransitioningDelegate: NSObject, UIViewControllerTransiti
 	public var isDismissEnabled = true
 	
 	// MARK:- Private variables
-	
+    
+    private let backgroundColor: UIColor?
 	private let presentDuration: TimeInterval?
 	private let presentAnimation: (() -> ())?
 	private let presentCompletion: ((Bool) -> ())?
@@ -46,11 +47,13 @@ public final class DeckTransitioningDelegate: NSObject, UIViewControllerTransiti
 	///   - dismissCompletion: A block that will be run after the card has been
 	///		dismissed
 	@objc public init(presentDuration: NSNumber? = nil,
-	                  presentAnimation: (() -> ())? = nil,
+	                  backgroundColor: UIColor? = nil,
+                      presentAnimation: (() -> ())? = nil,
 	                  presentCompletion: ((Bool) -> ())? = nil,
 	                  dismissDuration: NSNumber? = nil,
 	                  dismissAnimation: (() -> ())? = nil,
 	                  dismissCompletion: ((Bool) -> ())? = nil) {
+        self.backgroundColor = backgroundColor
 		self.presentDuration = presentDuration?.doubleValue
 		self.presentAnimation = presentAnimation
 		self.presentCompletion = presentCompletion
@@ -73,6 +76,7 @@ public final class DeckTransitioningDelegate: NSObject, UIViewControllerTransiti
         let presentationController = DeckPresentationController(
 			presentedViewController: presented,
 			presenting: presenting,
+            backgroundColor: backgroundColor,
 			presentAnimation: presentAnimation,
 			presentCompletion: presentCompletion,
 			dismissAnimation: dismissAnimation,
